@@ -5,6 +5,15 @@
 **Status**: Draft  
 **Input**: User description: "PulseWatch / CronGuard / UptimeForge - A platform to monitor URLs, Cron jobs, APIs, and Server uptime with advanced features."
 
+## Clarifications
+
+### Session 2026-05-05
+- Q: Data Retention Policy → A: 30 Days
+- Q: Initial Alerting Channels → A: Email Only
+- Q: Response Validation Failure Handling → A: DOWN state
+- Q: AI Feature Scope for MVP → A: Root Cause Detection
+- Q: Public Status Pages Availability → A: Post-MVP Enhancement
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Create and Manage URL Monitors (Priority: P1)
@@ -83,16 +92,17 @@ As a DevOps engineer, I want the system to provide AI root cause detection and a
 - **FR-002**: System MUST allow users to create, read, update, and delete URL Monitors.
 - **FR-003**: System MUST allow users to create, read, update, and delete Cron Monitors.
 - **FR-004**: System MUST perform URL checks at user-defined intervals (30s, 1m, 5m, 10m).
-- **FR-005**: System MUST validate URL responses based on expected status codes, response time, and optional body regex.
+- **FR-005**: System MUST validate URL responses based on expected status codes, response time, and optional body regex (regex failure triggers DOWN state).
 - **FR-006**: System MUST track SSL expiration dates for HTTPS endpoints.
 - **FR-007**: System MUST provide unique heartbeat URLs for Cron Monitors.
 - **FR-008**: System MUST require 3 consecutive failures to open an incident and 2 consecutive successes to resolve it.
 - **FR-009**: System MUST calculate and display uptime percentage `(successful_checks / total_checks) * 100`.
-- **FR-010**: System MUST send alerts via Email when an incident begins or ends.
+- **FR-010**: System MUST send alerts via Email when an incident begins or ends (Initial version).
 - **FR-011**: System MUST provide a dashboard displaying current monitor statuses, recent logs, and uptime metrics.
-- **FR-012**: System MUST incorporate AI root cause detection for incidents.
+- **FR-012**: System MUST incorporate AI root cause detection for confirmed incidents (Initial release).
 - **FR-013**: System MUST implement smart alert suppression to prevent alert fatigue.
 - **FR-014**: System MUST provide a visual timeline for cron jobs execution.
+- **FR-015**: System MUST retain individual monitor logs (check history) for 30 days.
 
 ### Key Entities
 
@@ -114,6 +124,7 @@ As a DevOps engineer, I want the system to provide AI root cause detection and a
 ## Assumptions
 
 - Users have a stable internet connection to view the dashboard.
+- Public Status Pages are out of scope for v1 and deferred to post-MVP.
 - The MVP requires Email as the primary alerting mechanism; Slack/Telegram/Webhooks are optional enhancements or fast-follows.
 - Payments and Stripe integration are deferred to a later phase ("later" as per PRD).
 - Multi-region monitoring will be simulated initially or rolled out in Phase 3 as per the scaling strategy.
