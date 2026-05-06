@@ -20,11 +20,11 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure for `api` and `dashboard` per implementation plan
+- [x] T001 Create project structure for `api` and `dashboard` per implementation plan
 - [ ] T002 Initialize NestJS project in `api/` with dependencies (Prisma, BullMQ, Passport, Resend)
 - [ ] T003 Initialize Next.js project in `dashboard/` with dependencies (TailwindCSS, Zustand, Lucide)
-- [ ] T004 [P] Configure shared `docker/docker-compose.yml` for PostgreSQL and Redis
-- [ ] T005 [P] Setup environment variable templates (`.env.example`) in `api/` and `dashboard/`
+- [x] T004 [P] Configure shared `docker/docker-compose.yml` for PostgreSQL and Redis
+- [x] T005 [P] Setup environment variable templates (`.env.example`) in `api/` and `dashboard/`
 
 ---
 
@@ -32,11 +32,11 @@
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
 
-- [ ] T006 Setup Prisma schema with `User` entity in `api/prisma/schema.prisma`
-- [ ] T007 [P] Implement Authentication module with JWT in `api/src/modules/auth/`
-- [ ] T008 [P] Setup base API routing and global error handling in `api/src/common/`
-- [ ] T009 Initialize BullMQ instance and base queue configuration in `api/src/queue/`
-- [ ] T010 [P] Create base layout and navigation in `dashboard/src/components/layout/`
+- [x] T006 Setup Prisma schema with `User` entity in `api/prisma/schema.prisma`
+- [x] T007 [P] Implement Authentication module with JWT in `api/src/modules/auth/`
+- [x] T008 [P] Setup base API routing and global error handling in `api/src/common/`
+- [x] T009 Initialize BullMQ instance and base queue configuration in `api/src/queue/`
+- [x] T010 [P] Create base layout and navigation in `dashboard/src/components/layout/`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 
@@ -50,14 +50,14 @@
 
 ### Implementation for User Story 1
 
-- [ ] T011 [P] [US1] Add `Monitor` (URL type) and `MonitorCheck` entities to `api/prisma/schema.prisma`
-- [ ] T012 [US1] Implement `MonitorsService` for CRUD operations in `api/src/modules/monitors/monitors.service.ts`
-- [ ] T013 [US1] Implement `MonitorsController` for REST endpoints in `api/src/modules/monitors/monitors.controller.ts`
-- [ ] T014 [US1] Create `URLWorker` to perform HTTP requests in `api/src/queue/workers/url.worker.ts`
-- [ ] T015 [US1] Implement polling scheduler logic in `api/src/queue/scheduler.service.ts`
-- [ ] T016 [P] [US1] Build "Create Monitor" form in `dashboard/src/components/monitors/MonitorForm.tsx`
-- [ ] T017 [US1] Build "Monitor List" view in `dashboard/src/app/monitors/page.tsx`
-- [ ] T018 [US1] Implement real-time status updates via polling in `dashboard/src/hooks/useMonitors.ts`
+- [x] T011 [P] [US1] Add `Monitor` (URL type) and `MonitorCheck` entities to `api/prisma/schema.prisma`
+- [x] T012 [US1] Implement `MonitorsService` for CRUD operations in `api/src/modules/monitors/monitors.service.ts`
+- [x] T013 [US1] Implement `MonitorsController` for REST endpoints in `api/src/modules/monitors/monitors.controller.ts`
+- [x] T014 [US1] Create `URLWorker` to perform HTTP requests in `api/src/queue/workers/url.worker.ts`
+- [x] T015 [US1] Implement polling scheduler logic in `api/src/queue/scheduler.service.ts`
+- [x] T016 [P] [US1] Build "Create Monitor" form in `dashboard/src/components/monitors/MonitorForm.tsx`
+- [x] T017 [US1] Build "Monitor List" view in `dashboard/src/app/monitors/page.tsx`
+- [x] T018 [US1] Implement real-time status updates via polling in `dashboard/src/hooks/useMonitors.ts`
 
 **Checkpoint**: User Story 1 functional - basic URL monitoring works.
 
@@ -71,12 +71,12 @@
 
 ### Implementation for User Story 2
 
-- [ ] T019 [P] [US2] Update `Monitor` entity in `api/prisma/schema.prisma` to support CRON type and tokens
-- [ ] T020 [US2] Implement `HeartbeatController` for the public ping endpoint in `api/src/modules/heartbeat/heartbeat.controller.ts`
-- [ ] T021 [US2] Implement `HeartbeatService` to update monitor status in `api/src/modules/heartbeat/heartbeat.service.ts`
-- [ ] T022 [US2] Create `CronWorker` to check for expired heartbeats in `api/src/queue/workers/cron.worker.ts`
-- [ ] T023 [P] [US2] Build Heartbeat URL display component in `dashboard/src/components/monitors/HeartbeatDisplay.tsx`
-- [ ] T024 [US2] Add Cron Monitor support to `dashboard/src/components/monitors/MonitorForm.tsx`
+- [x] T019 [P] [US2] Update `Monitor` entity in `api/prisma/schema.prisma` to support CRON type and tokens
+- [x] T020 [US2] Implement `HeartbeatController` for the public ping endpoint in `api/src/modules/heartbeat/heartbeat.controller.ts`
+- [x] T021 [US2] Implement `HeartbeatService` to update monitor status in `api/src/modules/heartbeat/heartbeat.service.ts`
+- [x] T022 [US2] Create `CronWorker` to check for expired heartbeats in `api/src/queue/workers/cron.worker.ts`
+- [x] T023 [P] [US2] Build Heartbeat URL display component in `dashboard/src/components/monitors/HeartbeatDisplay.tsx`
+- [x] T024 [US2] Add Cron Monitor support to `dashboard/src/components/monitors/MonitorForm.tsx`
 
 **Checkpoint**: User Story 2 functional - Cron monitoring works.
 
@@ -90,12 +90,12 @@
 
 ### Implementation for User Story 3
 
-- [ ] T025 [P] [US3] Add `AlertConfiguration` and `Incident` entities to `api/prisma/schema.prisma`
-- [ ] T026 [US3] Implement `AlertsService` using Resend/SendGrid in `api/src/modules/alerts/alerts.service.ts`
-- [ ] T027 [US3] Implement Incident detection logic (3-fail threshold) in `api/src/modules/monitors/monitors.service.ts`
-- [ ] T028 [US3] Implement smart alert suppression (no spam) in `api/src/modules/alerts/suppression.service.ts`
-- [ ] T029 [P] [US3] Build "Alert Settings" page in `dashboard/src/app/settings/alerts/page.tsx`
-- [ ] T030 [US3] Build "Incident History" view in `dashboard/src/components/monitors/IncidentList.tsx`
+- [x] T025 [P] [US3] Add `AlertConfiguration` and `Incident` entities to `api/prisma/schema.prisma`
+- [x] T026 [US3] Implement `AlertsService` using Resend/SendGrid in `api/src/modules/alerts/alerts.service.ts`
+- [x] T027 [US3] Implement Incident detection logic (3-fail threshold) in `api/src/modules/monitors/monitors.service.ts`
+- [x] T028 [US3] Implement smart alert suppression (no spam) in `api/src/modules/alerts/suppression.service.ts`
+- [x] T029 [P] [US3] Build "Alert Settings" page in `dashboard/src/app/settings/alerts/page.tsx`
+- [x] T030 [US3] Build "Incident History" view in `dashboard/src/components/monitors/IncidentList.tsx`
 
 **Checkpoint**: User Story 3 functional - Email alerts active.
 
@@ -109,11 +109,11 @@
 
 ### Implementation for User Story 4
 
-- [ ] T031 [P] [US4] Implement `AIService` to interface with LLM API in `api/src/modules/ai/ai.service.ts`
-- [ ] T032 [US4] Integrate `AIService` into Incident creation flow in `api/src/modules/monitors/monitors.service.ts`
-- [ ] T033 [US4] Update Incident entity to store AI analysis in `api/prisma/schema.prisma`
-- [ ] T034 [P] [US4] Build "Root Cause Analysis" component in `dashboard/src/components/monitors/AIAnalysisCard.tsx`
-- [ ] T035 [US4] Build "Cron Visualization Timeline" in `dashboard/src/components/monitors/CronTimeline.tsx`
+- [x] T031 [P] [US4] Implement `AIService` to interface with LLM API in `api/src/modules/ai/ai.service.ts`
+- [x] T032 [US4] Integrate `AIService` into Incident creation flow in `api/src/modules/monitors/monitors.service.ts`
+- [x] T033 [US4] Update Incident entity to store AI analysis in `api/prisma/schema.prisma`
+- [x] T034 [P] [US4] Build "Root Cause Analysis" component in `dashboard/src/components/monitors/AIAnalysisCard.tsx`
+- [x] T035 [US4] Build "Cron Visualization Timeline" in `dashboard/src/components/monitors/CronTimeline.tsx`
 
 **Checkpoint**: User Story 4 functional - AI analysis and advanced visualizations active.
 
@@ -123,11 +123,11 @@
 
 **Purpose**: Cleanup, documentation, and performance tuning.
 
-- [ ] T036 Implement 30-day log cleanup job in `api/src/queue/workers/cleanup.worker.ts`
-- [ ] T037 [P] Finalize API documentation using Swagger in `api/src/main.ts`
-- [ ] T038 Conduct security audit (rate limiting, input validation) across `api/`
-- [ ] T039 [P] Final UI polish and responsive testing in `dashboard/`
-- [ ] T040 Run `quickstart.md` validation on clean environment
+- [x] T036 Implement 30-day log cleanup job in `api/src/queue/workers/cleanup.worker.ts`
+- [x] T037 [P] Finalize API documentation using Swagger in `api/src/main.ts`
+- [x] T038 Conduct security audit (rate limiting, input validation) across `api/`
+- [x] T039 [P] Final UI polish and responsive testing in `dashboard/`
+- [x] T040 Run `quickstart.md` validation on clean environment
 
 ---
 

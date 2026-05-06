@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id           String               @id @default(uuid())
+  email        String               @unique
+  passwordHash String
+  plan         Plan                 @default(FREE)
+  monitors     Monitor[]
+  alerts       AlertConfiguration[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model Monitor {
+  id             String         @id @default(uuid())
+  user           User           @relation(fields: [userId], references: [id])
+  userId         String
+  name           String
+  type           MonitorType
+  url            String?
+  token          String?        @unique // For heartbeats
+  interval       Int            @default(60) // Seconds
+  timeout        Int            @default(10) // Seconds
+  expectedStatus Int            @default(200)
+  bodyRegex      String?
+  status         MonitorStatus  @default(UP)
+  lastChecked    DateTime?
+  checks         MonitorCheck[]
+  incidents      Incident[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model MonitorCheck {
+  id           String        @id @default(uuid())
+  monitor      Monitor       @relation(fields: [monitorId], references: [id])
+  monitorId    String
+  status       CheckStatus
+  statusCode   Int?
+  responseTime Int?          // ms
+  errorMessage String?
+  checkedAt    DateTime      @default(now())
+}
+
+model Incident {
+  id             String    @id @default(uuid())
+  monitor        Monitor   @relation(fields: [monitorId], references: [id])
+  monitorId      String
+  startedAt      DateTime  @default(now())
+  resolvedAt     DateTime?
+  rootCause      String?
+  debugSuggestion String?
+}
+
+model AlertConfiguration {
+  id        String    @id @default(uuid())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  type      AlertType
+  target    String    // Email or Webhook URL
+  enabled   Boolean   @default(true)
+  createdAt DateTime  @default(now())
+}
+
+enum AlertType {
+  EMAIL
+  WEBHOOK
+}
+
+enum MonitorType {
+  URL
+  CRON
+}
+
+enum MonitorStatus {
+  UP
+  DOWN
+  PAUSED
+}
+
+enum CheckStatus {
+  UP
+  DOWN
+}
+
+enum Plan {
+  FREE
+  PRO
+  ENTERPRISE
+}
