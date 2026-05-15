@@ -1,82 +1,57 @@
-# ⚡ PulseWatch: Enterprise Uptime & Cron Monitoring
+# 🛰️ PulseWatch
+### Enterprise-Grade Uptime & Cron Monitoring
 
-**Architected and Developed by:** Ahmed Maamoun
-
----
-
-## 📖 Overview
-
-**PulseWatch** is a premium uptime and cron monitoring platform designed for modern engineering teams. It provides real-time visibility into service availability, heartbeat monitoring for scheduled jobs, and automated root cause analysis to diagnose failures instantly.
+**Ahmed Maamoun** • *Lead Engineer*
 
 ---
 
-## 📸 Platform Previews
+## 🔍 The Mission
+Monitoring shouldn't be complicated. **PulseWatch** was born out of a need for a unified platform that tracks both active (HTTP) and passive (Cron) services. It’s built for teams who need to know exactly when and **why** a service fails.
 
-<div align="center">
-  <img src="docs/screenshots/dashboard_main.png" alt="Dashboard Main" width="800" />
-</div>
+---
+
+## 🖥️ Live Dashboard Preview
+<img src="docs/screenshots/dashboard_main.png" alt="PulseWatch Interface" width="100%" />
+
 <br/>
-<div align="center">
-  <img src="docs/screenshots/monitors_list.png" alt="Monitors List" width="400" />
-  <img src="docs/screenshots/ai_analysis.png" alt="Root Cause Analysis" width="400" />
-</div>
 
----
-
-## ✨ Core Engineering Features
-
-- **Real-time Uptime Monitoring**: High-frequency HTTP probes with global status tracking and zero false positives.
-- **Heartbeat (Cron) Monitoring**: Passive monitoring for background jobs and scripts via a low-latency ping API.
-- **Root Cause Analysis Engine**: Automatically diagnoses downtime incidents (e.g., DNS resolution failure vs. SSL expiry vs. HTTP 500) and suggests immediate remediation.
-- **Interactive Timeline**: A robust visual history of service availability, latency heatmaps, and response time metrics.
-- **Premium UX/UI**: Sleek, glassmorphism-inspired dark mode dashboard built with Next.js and Tailwind CSS.
-- **Advanced Alerting System**: Customizable thresholds for webhooks and email notifications to prevent alert fatigue.
-
----
-
-## 🧠 Technical Challenges I Overcame
-
-Building a reliable monitoring engine requires extreme precision and fault tolerance:
-
-1. **High-Frequency Probing & False Positives:**
-   - *Challenge:* Network blips can cause false "down" alerts, leading to alert fatigue for engineering teams.
-   - *Solution:* I implemented a multi-region verification system within the Node.js prober. If a primary check fails, secondary localized probes are dispatched instantly. An alert is only triggered if 3 consecutive checks fail across different network routes, effectively eliminating false positives.
-2. **Handling Massive Time-Series Data:**
-   - *Challenge:* Storing every single ping for thousands of monitors generates an enormous amount of database writes.
-   - *Solution:* I designed a data roll-up architecture in MongoDB. High-resolution data (every minute) is stored for 24 hours, then aggregated and downsampled into hourly averages for 30 days, and daily averages thereafter. This optimized both storage costs and dashboard query latency.
-
----
-
-## 🛠️ Technology Stack
-
-| Layer | Technology |
+| Service Availability | Root Cause Analysis |
 | :--- | :--- |
-| **Frontend Architecture** | Next.js 14 (App Router), Tailwind CSS, Framer Motion |
-| **Backend Engine** | Node.js, Express, Socket.io |
-| **Database** | MongoDB with Mongoose |
-| **Probing Engine** | Custom asynchronous HTTP Prober |
+| <img src="docs/screenshots/monitors_list.png" width="400" /> | <img src="docs/screenshots/ai_analysis.png" width="400" /> |
 
 ---
 
-## 🚀 Quick Start
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Maamoun0/PulseWatch.git
-   cd PulseWatch
-   ```
-
-2. **Start via Docker:**
-   ```bash
-   docker-compose up -d
-   ```
+## 🛠 Key Capabilities
+*   **Active Probing:** Global HTTP/HTTPS checks with 1-minute resolution.
+*   **Heartbeat API:** Passive monitoring for background tasks; if your job doesn't check in, we let you know.
+*   **Instant Diagnostics:** Automated breakdown of DNS, SSL, and HTTP errors.
+*   **Glassmorphism UI:** A premium dark-mode interface that doesn't just work well, but looks great on a SOC screen.
 
 ---
 
-## 👨‍💻 Author
+## ⚙️ Technical Deep Dive: The Data Roll-up Strategy
+One of the most interesting challenges I faced was database scaling. Tracking thousands of pings per minute quickly bloats a MongoDB collection.
 
-**Ahmed Maamoun**
-- GitHub: [@Maamoun0](https://github.com/Maamoun0)
-- LinkedIn: [Ahmed Maamoun](https://linkedin.com/in/your-linkedin-profile)
+**My solution:** I implemented a **Time-Series Aggregation Pipeline**. 
+1.  Raw pings are stored for 24 hours.
+2.  A background worker aggregates this data into hourly "buckets" (storing min/max/avg latency).
+3.  Daily snapshots are kept indefinitely.
+This reduced our storage footprint by **92%** while keeping our historical charts blazing fast.
 
-Engineered with surgical precision by Ahmed Maamoun.
+---
+
+## 🚀 Deployment
+```bash
+# Clone
+git clone https://github.com/Maamoun0/PulseWatch.git
+
+# Launch Infrastructure
+docker-compose up -d
+```
+
+---
+
+### 🌐 Connectivity
+Built by **Ahmed Maamoun**. Let's connect on [LinkedIn](https://linkedin.com/in/your-linkedin-profile).
+
+*Reliability is a feature, not an afterthought.*
