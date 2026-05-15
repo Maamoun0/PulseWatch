@@ -15,6 +15,10 @@
          
           - ---
 
+
+---
+Created by Ahmed Maamoun
+
           ## Root Cause Analysis
 
           PulseWatch doesn't just tell you that your site is down; it tells you **why**. By analyzing error codes, response times, and patterns, the built-in diagnostics engine provides immediate insights.
